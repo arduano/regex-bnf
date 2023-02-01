@@ -5,7 +5,10 @@ use std::{cell::RefCell, collections::HashMap};
 use regex::Regex;
 use thiserror::Error;
 
+#[cfg(feature = "debug-logs")]
 const PARSE_DEBUG: bool = true;
+#[cfg(not(feature = "debug-logs"))]
+const PARSE_DEBUG: bool = false;
 
 #[derive(Debug, Copy, Clone, Hash, PartialEq)]
 pub struct FileLocation {

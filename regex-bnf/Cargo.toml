@@ -1,6 +1,6 @@
 [package]
 name = "regex-bnf"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 repository = "https://github.com/arduano/regex-bnf/tree/master/regex-bnf"
 description = "A deterministic parser for a BNF inspired syntax with regular expressions"
@@ -10,3 +10,6 @@ license = "MIT"
 regex = "1.7.1"
 regex-bnf-macro = { version = "0.1.1", path = "../regex-bnf-macro" }
 thiserror = "1.0.38"
+
+[features]
+debug-logs = []
