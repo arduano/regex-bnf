@@ -484,7 +484,7 @@ impl Parse for BnfTagArgKind {
             let string: LitStr = input.parse()?;
 
             // I don't know if there's a better way to detect raw strings
-            if string.token().to_string().starts_with("r") {
+            if string.token().to_string().starts_with('r') {
                 Ok(Self::Regex(string))
             } else {
                 Ok(Self::String(string))

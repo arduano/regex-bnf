@@ -2,6 +2,7 @@
 name = "regex-bnf-derive"
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/arduano/regex-bnf/tree/master/regex-bnf-derive"
 
 [lib]
 proc-macro = true
