@@ -1,0 +1,3 @@
+[workspace]
+
+members = ["regex-bnf", "regex-bnf-derive"]
