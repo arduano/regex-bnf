@@ -48,7 +48,7 @@ dependencies = [
 
 [[package]]
 name = "regex-bnf"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "regex",
  "regex-bnf-macro",
@@ -57,7 +57,7 @@ dependencies = [
 
 [[package]]
 name = "regex-bnf-macro"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "proc-macro2",
  "quote",

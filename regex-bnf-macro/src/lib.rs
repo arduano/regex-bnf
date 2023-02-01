@@ -277,13 +277,13 @@ impl BnfTagArgKind {
                 }
             },
             Self::String(_) => {
-                quote! { TextLit<'a> }
+                quote! { TextSlice<'a> }
             }
             Self::Regex(_) => {
-                quote! { TextLit<'a> }
+                quote! { TextSlice<'a> }
             }
             Self::CustomFn(_) => {
-                quote! { TextLit<'a> }
+                quote! { TextSlice<'a> }
             }
             Self::Eof => {
                 quote! { () }
@@ -538,6 +538,11 @@ pub fn bnf(input: TokenStream) -> TokenStream {
                         pub fn parse(mut #input_ident: StringParser<'a>) -> Result<(Self, StringParser<'a>), ParseError> {
                             Ok((#parse_quote, #input_ident))
                         }
+
+                        pub fn parse_str(string: &'a str) -> Result<(Self, StringParser<'a>), ParseError> {
+                            let mut #input_ident = StringParser::new(string);
+                            Self::parse(#input_ident)
+                        }
                     }
                 }
             }
@@ -548,6 +553,11 @@ pub fn bnf(input: TokenStream) -> TokenStream {
                     impl<'a> #name<'a> {
                         pub fn parse(mut #input_ident: StringParser<'a>) -> Result<(Self, StringParser<'a>), ParseError> {
                             #parse_quote
+                        }
+
+                        pub fn parse_str(string: &'a str) -> Result<(Self, StringParser<'a>), ParseError> {
+                            let mut #input_ident = StringParser::new(string);
+                            Self::parse(#input_ident)
                         }
                     }
                 }

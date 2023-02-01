@@ -46,12 +46,12 @@ impl std::fmt::Display for FileLocation {
 }
 
 #[derive(Debug, Clone, Hash, PartialEq)]
-pub struct TextLit<'a> {
+pub struct TextSlice<'a> {
     pub text: &'a str,
     pub location: FileLocation,
 }
 
-impl<'a> TextLit<'a> {
+impl<'a> TextSlice<'a> {
     pub fn new(text: &'a str, location: FileLocation) -> Self {
         Self { text, location }
     }
@@ -143,13 +143,13 @@ impl<'a> StringParser<'a> {
         }
     }
 
-    pub fn split_at(&self, pos: usize) -> (TextLit<'a>, Self) {
+    pub fn split_at(&self, pos: usize) -> (TextSlice<'a>, Self) {
         let (left, right) = self.text.split_at(pos);
         let forked = Self {
             text: right,
             pos: self.pos.advanced_by(left),
         };
-        let left = TextLit::new(left, self.pos);
+        let left = TextSlice::new(left, self.pos);
         (left, forked)
     }
 
@@ -165,7 +165,7 @@ thread_local! {
 pub fn parse_string_lit<'a>(
     input: StringParser<'a>,
     lit: &'static str,
-) -> Result<(TextLit<'a>, StringParser<'a>), ()> {
+) -> Result<(TextSlice<'a>, StringParser<'a>), ()> {
     if input.text.starts_with(lit) {
         if PARSE_DEBUG {
             println!("Matched string literal: {:?} at {}", lit, input.pos);
@@ -179,7 +179,7 @@ pub fn parse_string_lit<'a>(
     }
 }
 
-pub fn get_regex(regex: &str) -> Regex {
+fn get_regex(regex: &str) -> Regex {
     REGEXES.with(|regexes| {
         let mut regexes = regexes.borrow_mut();
         if let Some(regex) = regexes.get(regex) {
@@ -195,7 +195,7 @@ pub fn get_regex(regex: &str) -> Regex {
 pub fn parse_string_regex<'a>(
     input: StringParser<'a>,
     regex_str: &'static str,
-) -> Result<(TextLit<'a>, StringParser<'a>), ()> {
+) -> Result<(TextSlice<'a>, StringParser<'a>), ()> {
     let regex = get_regex(regex_str);
 
     if let Some(captures) = regex.find_at(input.text, 0) {

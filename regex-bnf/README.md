@@ -6,7 +6,7 @@ This approach is useful when you need to parse a complex grammar without tokeniz
 
 Here is a simple example CSV parser:
 
-```rs
+```
 use regex_bnf::*;
 
 bnf! {
@@ -27,6 +27,10 @@ The above macro creates a struct for each token (`Value`, `Line`, `Document`, et
 ## NOTE
 
 This implementation is entirely deterministic, and succeptable to deadlocks including infite loops and stack overflows. In order to debug it, read it linearly as each struct parses in the order of declaration. So in the CSV example above, `LineEnd` would first try to parse `NewLine` and then `Eof`. If it fails to parse either, it will return an error.
+
+## Performance
+
+The parser is very high performance, as it has zero nondeterminstic behavior and also performs zero allocations other than boxed tokens wich are optional. All parsed strings are referenced as slices along with their location (index, line number, line column).
 
 ## Syntax
 

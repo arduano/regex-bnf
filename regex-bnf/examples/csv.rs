@@ -14,8 +14,7 @@ bnf! {
 
 fn main() {
     let input = "foo,bar,baz\n1,2,3";
-    let parser = StringParser::new(input);
-    let result = Document::parse(parser);
+    let result = Document::parse_str(&input);
 
     match result {
         Ok(result) => println!("{:#?}", result.0),
