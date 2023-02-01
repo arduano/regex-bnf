@@ -1,0 +1,15 @@
+[package]
+name = "regex-bnf-macro"
+version = "0.1.0"
+edition = "2021"
+repository = "https://github.com/arduano/regex-bnf/tree/master/regex-bnf-macro"
+description = "The proc-macro crate for regex-bnf"
+license = "MIT"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1.0.50"
+quote = "1.0.23"
+syn = "1.0.107"

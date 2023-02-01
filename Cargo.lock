@@ -51,12 +51,12 @@ name = "regex-bnf"
 version = "0.1.0"
 dependencies = [
  "regex",
- "regex-bnf-derive",
+ "regex-bnf-macro",
  "thiserror",
 ]
 
 [[package]]
-name = "regex-bnf-derive"
+name = "regex-bnf-macro"
 version = "0.1.0"
 dependencies = [
  "proc-macro2",

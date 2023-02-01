@@ -3,8 +3,10 @@ name = "regex-bnf"
 version = "0.1.0"
 edition = "2021"
 repository = "https://github.com/arduano/regex-bnf/tree/master/regex-bnf"
+description = "A deterministic parser for a BNF inspired syntax with regular expressions"
+license = "MIT"
 
 [dependencies]
 regex = "1.7.1"
-regex-bnf-derive = { version = "0.1.0", path = "../regex-bnf-derive" }
+regex-bnf-macro = { version = "0.1.0", path = "../regex-bnf-macro" }
 thiserror = "1.0.38"
